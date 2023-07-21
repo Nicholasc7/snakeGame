@@ -1,26 +1,50 @@
-# Example file showing a circle moving on screen
 import pygame
 
 # pygame setup
 pygame.init()
-screen = pygame.display.set_mode((1280, 720))
+screen = pygame.display.set_mode((900, 900))
 clock = pygame.time.Clock()
 running = True
 dt = 0
 
+# Global 
 player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
 
+
+
+# Game start
 while running:
-    # poll for events
-    # pygame.QUIT event means the user clicked X to close your window
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+            print(tiles)
 
     # fill the screen with a color to wipe away anything from last frame
     screen.fill("lightblue")
 
-    pygame.draw.circle(screen, "red", player_pos, 40)
+
+
+    # Create grid
+    # Grid will be 12x12 with tiles being 75px
+    # TILE STATES: 0 = blank, 1 = snakeBody, 2 = snakeHead, 3 = Food 
+    tiles = {}
+    for a in range(12):
+        y = a * 75
+        for b in range(12):
+            tiles[(a*75, b*75)] = 0
+            tileVector = pygame.Vector2(b * 75, y)
+            tile = pygame.Rect(tileVector[0], tileVector[1], 75, 75)
+            pygame.draw.rect(screen, 'black', tile)
+    
+
+
+    # Create grid lines
+
+            
+
+
+
+    pygame.draw.circle(screen, "red", player_pos, 20)
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_w]:
